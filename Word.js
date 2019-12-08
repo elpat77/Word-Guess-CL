@@ -38,5 +38,7 @@ class Word {
         return wordString;
     }
 }
+// word = new Word('testing');
+// console.log(word);
 
 module.exports = Word;

@@ -18,7 +18,7 @@ function getRandomCrypto() {
 
     // create an array that will get the word assocaiated with that random location
     var randomCrypto = cryptocurrencies[randomNum];
-    console.log("The crypto I'm thinking of is " + randomCrypto);
+    // console.log("The crypto I'm thinking of is " + randomCrypto);
 
     var currentCrypto = new Word(randomCrypto);
     console.log("The cryptocurrency I'm thinking of is ", currentCrypto);
@@ -32,25 +32,42 @@ function runGame() {
         message: "Choose a letter",
         name: "input"
     }).then(result => {
-        let input = result.input;
-        if (!lettersGuessed.includes(input)) {
-            lettersGuessed.push(input);
-            console.log(input);
+        if (!currentCrypto.showWord().includes(result.userInput[0])) {
             guessesLeft--;
         }
-        // // Running the guessLetter function on each letter in currentCrypto
-        // lettersGuessed.userGuess(input[0].toLowerCase());
-        // // Checking if the user has won the game
-        // if (lettersGuessed.stringWord().includes("_") && guessesLeft > 0) {
-        //     runGame();
-        // } else if (!lettersGuessed.stringWord().includes("_") && guessesLeft > 0) {
-        //     console.log('you win');
-        //     // displayWin();
-        // } else if (guesses < 1) {
-        //     console.log('you lose');
-        //     // displayLoss();
-        // }
+        // Running the guessLetter function on each letter in currentWord
+        currentCrypto.userGuess(result.userInput[0]);
+        // Checking if the user has won the game
+        if (currentCrypto.stringWord().includes("_") && guesses > 0) {
+            runGame();
+        } else if (!currentCrypto.stringWord().includes("_") && guesses > 0) {
+            console.log("win");
+            // displayWin();
+        } else if (guesses < 1) {
+            console.log("loose");
+            // displayLoss();
+        }
     });
 }
+// let input = result.input;
+// if (!lettersGuessed.includes(input)) {
+//     lettersGuessed.push(input);
+
+//     console.log(input);
+//     guessesLeft--;
+// }
+// // Running the guessLetter function on each letter in currentCrypto
+// lettersGuessed.userGuess(input[0].toLowerCase());
+// // Checking if the user has won the game
+// if (lettersGuessed.stringWord().includes("_") && guessesLeft > 0) {
+//     runGame();
+// } else if (!lettersGuessed.stringWord().includes("_") && guessesLeft > 0) {
+//     console.log('you win');
+//     // displayWin();
+// } else if (guesses < 1) {
+//     console.log('you lose');
+//     // displayLoss();
+// }
+
 
 getRandomCrypto();

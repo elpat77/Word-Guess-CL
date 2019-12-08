@@ -14,16 +14,31 @@ class Letter {
     }
 
     getLetter() {
-        if (this.isGuessed) {
+        if (this.letterGuessed) {
             return this.letter;
         } else if (!this.letterGuessed) {
             return "_";
         }
     }
 
+    // getLetterGuessed() {
+    //     return this.letterGuessed;
+    // }
+
+    // userGuess(guess) {
+    //     if (guess === ' ') {
+    //         return ' ';
+    //     }
+    //     if (!this.guessedLetter(guess)) {
+    //         return "_";
+    //     } else {
+    //         return guess;
+    //     }
+    // }
+
     guessedLetter(guess) {
-        if (guess === this.letter) {
-            this.letterGuesssed = true;
+        if (guess.toLowerCase() === this.letter.toLowerCase()) {
+            this.letterGuessed = true;
         }
     }
 
@@ -31,5 +46,13 @@ class Letter {
         return this.letter;
     }
 }
+// letter = new Letter('J');
+// console.log(letter);
+
+// letter.guessedLetter('W');
+// console.log(letter);
+
+// letter.guessedLetter('j');
+// console.log(letter);
 
 module.exports = Letter
