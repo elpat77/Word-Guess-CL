@@ -5,9 +5,7 @@ var Word = require("./Word");
 
 //global variables and word array
 var cryptocurrencies = ["Bitcoin", "Litecoin", "XRP", "BinanceCoin", "Ethereum", "Monero", "Tron", "Dogecoin", "Tether", "Chainlink", "Stellar", "Cardano"];
-var guessesLeft = 7;
-var lettersGuessed = [];
-
+var guessesLeft = 10;
 
 //function to get a random word
 function getRandomCrypto() {
@@ -27,29 +25,24 @@ function getRandomCrypto() {
                 "\n\n*******************************\n\n" + "The cryptocurrency is: " + currentCrypto.showWord() + "\n\nChoosse a letter",
             name: "input"
         })
-            .then(result => {
-                let input = result.input;
-                if (!lettersGuessed.includes(input)) {
-                    lettersGuessed.push(input);
-                    currentCrypto.userGuess(input);
-                    // console.log(lettersGuessed);
-                    // console.log(guessesLeft);
-                    // console.log(currentCrypto);
-                    if (!currentCrypto.contains(input)) {
-                        guessesLeft--;
-                        console.log("Sorry,", input, "is incorrect, try again!");
-                        console.log("You have", guessesLeft, "guesses left")
-                    }
-                    if (guessesLeft = 0) {
-                        console.log("Sorry game over, try again!");
-                        // runGame();
-                    }
-                    if (!currentCrypto.done()) {
-                        runGame();
-                    }
-
+            .then(answers => {
+                if (!currentCrypto.showWord().includes(answers.input[0])) {
+                    guessesLeft--;
+                }
+                // Running the guessLetter function on each letter in currentCrypto
+                currentCrypto.userGuess(answers.input[0]);
+                // Checking if the user has won the game
+                if (currentCrypto.showWord().includes("_") && guessesLeft > 0) {
+                    runGame();
+                } else if (!currentCrypto.showWord().includes("_") && guessesLeft > 0) {
+                    console.log('\nCongratulations, you win!');
+                    console.log('The cryptocurrency was: ', currentCrypto.showWord(), "\n");
+                } else if (guessesLeft < 1) {
+                    console.log('\nYou have', guessesLeft, 'guesses left')
+                    console.log('\nGame over! Please try again');
 
                 }
+
             });
     }
 }
