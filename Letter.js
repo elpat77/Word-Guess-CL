@@ -17,24 +17,13 @@ class Letter {
         if (this.letterGuessed) {
             return this.letter;
         } else if (!this.letterGuessed) {
-            return "_";
+            return "_ ";
         }
     }
 
-    // getLetterGuessed() {
-    //     return this.letterGuessed;
-    // }
-
-    // userGuess(guess) {
-    //     if (guess === ' ') {
-    //         return ' ';
-    //     }
-    //     if (!this.guessedLetter(guess)) {
-    //         return "_";
-    //     } else {
-    //         return guess;
-    //     }
-    // }
+    getLetterGuessed() {
+        return this.letterGuessed;
+    }
 
     guessedLetter(guess) {
         if (guess.toLowerCase() === this.letter.toLowerCase()) {
