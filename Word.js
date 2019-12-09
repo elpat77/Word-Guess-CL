@@ -38,25 +38,6 @@ class Word {
         }
         return wordString;
     }
-
-    done() {
-        this.completed = false;
-        let count = 0;
-        for (let i = 0; i < this.letters.length; i++) {
-            if (this.letters[i].getLetterGuessed()) {
-                count++;
-            }
-            if (this.letters[i].getLetter() === ' ') {
-                count++;
-            }
-        }
-        if (count === this.letters.length) {
-            this.completed = true;
-        } else {
-            this.completed = false;
-        }
-        return this.completed;
-    }
 }
 // word = new Word('testing');
 // console.log(word);
